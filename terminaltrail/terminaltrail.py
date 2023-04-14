@@ -78,7 +78,7 @@ def main():
 
     print(text.comment_prefix[args.lang])
     response = chat.generate_text(history, lang=args.lang, mode=args.mode,
-                                  prompt=text.preprompt[args.lang] + text.praise[args.lang] + text.comment_ai[args.lang])
+                                  contents=text.preprompt[args.lang] + text.praise[args.lang] + text.comment_ai[args.lang])
 
     print(response)
 
