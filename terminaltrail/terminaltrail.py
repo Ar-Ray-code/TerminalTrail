@@ -77,9 +77,7 @@ def main():
         text_path=args.text_path, max_depth=args.max_depth)
 
     print(text.comment_prefix[args.lang])
-    response = chat.generate_text(history, lang=args.lang, mode=args.mode,
-                                  contents=text.preprompt[args.lang] + text.praise[args.lang] + text.comment_ai[args.lang])
-
+    response = chat.generate_text(history, lang=args.lang, mode=args.mode)
     print(response)
 
 
