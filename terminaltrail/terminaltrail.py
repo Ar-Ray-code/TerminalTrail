@@ -40,10 +40,13 @@ def main():
     parser.add_argument('--text_path', help='Path to bash history', default='~/.bash_history')
     args = parser.parse_args()
 
+    if args.api_key is None:
+        print('Please set API key for OpenAI')
+        exit(1)
+
     chat = chatgpt_api.ChatGPT(args.api_key)
 
     print('------- TerminalTrail✨ Summary -------')
-    print('API key: **********************')
     print('Mode: {}'.format(args.mode))
     print('Language: {}'.format(args.lang))
     print('History path: {}'.format(args.text_path))
