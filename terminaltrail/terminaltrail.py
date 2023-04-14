@@ -15,9 +15,8 @@
 # limitations under the License.
 
 import argparse
-
+from terminaltrail import chatgpt_api
 import os
-import chatgpt_api
 
 def get_bash_history(text_path: str, max_depth: int=100) -> str:
     bash_history_path = os.path.expanduser(os.path.expandvars(text_path))

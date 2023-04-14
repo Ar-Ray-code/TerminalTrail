@@ -15,7 +15,7 @@
 # limitations under the License.
 
 import openai
-from prompt import preprompt, comment_ai, comment_user, praise, solve, summary, tips
+from terminaltrail.prompt import preprompt, comment_ai, comment_user, praise, solve, summary, tips
 
 JP = 0
 EN = 1
