@@ -15,7 +15,7 @@
 # limitations under the License.
 
 import openai
-from terminaltrail.prompt import preprompt, comment_ai, comment_user, praise, solve, summary, tips
+from terminaltrail.prompt import text
 
 JP = 0
 EN = 1
@@ -31,17 +31,17 @@ class ChatGPT:
 
     def generate_text(self, contents: str, lang: int=JP, mode: int=PRAISE_MODE) -> str:
         messages = [
-            {'role': 'user', 'content': preprompt[lang]},
-            {'role': 'assistant',  'content': comment_ai[lang]}
+            {'role': 'user', 'content': text.preprompt[lang]},
+            {'role': 'assistant',  'content': text.comment_ai[lang]}
         ]
         if mode == PRAISE_MODE:
-            messages += [{'role': 'user', 'content': comment_user[lang].replace('<trail_mode>', praise[lang]) + '```bash\n' + contents + '```'}]
+            messages += [{'role': 'user', 'content': text.comment_user[lang].replace('<trail_mode>', text.praise[lang]) + '```bash\n' + contents + '```'}]
         elif mode == SOLVE_MODE:
-            messages += [{'role': 'user', 'content': comment_user[lang].replace('<trail_mode>', solve[lang]) + '```bash\n' + contents + '```'}]
+            messages += [{'role': 'user', 'content': text.comment_user[lang].replace('<trail_mode>', text.solve[lang]) + '```bash\n' + contents + '```'}]
         elif mode == SUMMARY_MODE:
-            messages += [{'role': 'user', 'content': comment_user[lang].replace('<trail_mode>', summary[lang]) + '```bash\n' + contents + '```'}]
+            messages += [{'role': 'user', 'content': text.comment_user[lang].replace('<trail_mode>', text.summary[lang]) + '```bash\n' + contents + '```'}]
         elif mode == TIPS_MODE:
-            messages += [{'role': 'user', 'content': comment_user[lang].replace('<trail_mode>', tips[lang]) + '```bash\n' + contents + '```'}]
+            messages += [{'role': 'user', 'content': text.comment_user[lang].replace('<trail_mode>', text.tips[lang]) + '```bash\n' + contents + '```'}]
 
         response = openai.ChatCompletion.create(
             model='gpt-3.5-turbo',

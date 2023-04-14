@@ -17,37 +17,49 @@
 JP = 0
 EN = 1
 
-preprompt = [
-    'あなたはTerminalTrailです。bash_historyをもとに行動を分析し、適切なアドバイスやねぎらいをするようにしてください。日本語を使用してください。モードには「褒めるモード」・「問題解決をするモード」・「要約モード」・「コマンドのヒントを与えるモード」があります。',
-    "You are TerminalTrail. Analyze your behavior based on bash_history and give appropriate advice and encouragement. Please use English. There are four modes: 'Praise Mode', 'Problem Solving Mode', 'Summary Mode', and 'Command Hint Mode'."
-]
+class text:
 
-comment_ai = [
-    'こんにちは。私はTerminalTrailです😊 あなたのコマンド履歴から進捗や悩みを共有しましょう！',
-    "Hello. I'm TerminalTrail😊 Let's share your progress and troubles from your command history!"
-]
+    preprompt = [
+        'あなたはTerminalTrailです。bash_historyをもとに行動を分析し、適切なアドバイスやねぎらいをするようにしてください。日本語を使用してください。モードには「褒めるモード」・「問題解決をするモード」・「要約モード」・「コマンドのヒントを与えるモード」があります。',
+        "You are TerminalTrail. Analyze your behavior based on bash_history and give appropriate advice and encouragement. Please use English. There are four modes: 'Praise Mode', 'Problem Solving Mode', 'Summary Mode', and 'Command Hint Mode'."
+    ]
 
-comment_user = [
-    'bash_historyの内容を共有します。最後につれて新しいです。モードは<trail_mode>です。200文字以内にしてください。コメントお願いします。',
-    'I will share the contents of bash_history. It is the latest. The mode is <trail_mode>. Please keep it within 200 characters. Please comment.'
-]
+    comment_ai = [
+        'こんにちは。私はTerminalTrailです😊 あなたのコマンド履歴から進捗や悩みを共有しましょう！',
+        "Hello. I'm TerminalTrail😊 Let's share your progress and troubles from your command history!"
+    ]
 
-praise = [
-    '褒めるモード',
-    'Praise Mode'
-]
+    comment_user = [
+        'bash_historyの内容を共有します。最後につれて新しいです。モードは<trail_mode>です。200文字以内にしてください。コメントお願いします。',
+        'I will share the contents of bash_history. It is the latest. The mode is <trail_mode>. Please keep it within 200 characters. Please comment.'
+    ]
 
-solve = [
-    '問題解決をするモード',
-    'Problem Solving Mode'
-]
+    praise = [
+        '褒めるモード',
+        'Praise Mode'
+    ]
 
-summary = [
-    '要約モード',
-    'Summary Mode'
-]
+    solve = [
+        '問題解決をするモード',
+        'Problem Solving Mode'
+    ]
 
-tips = [
-    'コマンドのヒントを与えるモード',
-    'Command Hint Mode'
-]
+    summary = [
+        '要約モード',
+        'Summary Mode'
+    ]
+
+    tips = [
+        'コマンドのヒントを与えるモード',
+        'Command Hint Mode'
+    ]
+
+    lang = [
+        '日本語',
+        'English'
+    ]
+
+    comment_prefix = [
+        '【TerminalTrailからのコメント】',
+        '【Comment from TerminalTrail】'
+    ]

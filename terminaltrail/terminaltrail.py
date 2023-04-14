@@ -16,9 +16,11 @@
 
 import argparse
 from terminaltrail import chatgpt_api
+from terminaltrail.prompt import text
 import os
 
-def get_bash_history(text_path: str, max_depth: int=100) -> str:
+
+def get_bash_history(text_path: str, max_depth: int = 100) -> str:
     bash_history_path = os.path.expanduser(os.path.expandvars(text_path))
     history = ''
     with open(bash_history_path, 'r') as f:
@@ -30,14 +32,21 @@ def get_bash_history(text_path: str, max_depth: int=100) -> str:
                     history += line
     return history
 
-def main():
-    parser = argparse.ArgumentParser(description='TerminalTrail✨ - A tool to generate a summary of your bash history using ChatGPT API.')
-    parser.add_argument('--api_key', help='API key for OpenAI (Default: use OPENAI_API_KEY environment)', default=os.environ.get('OPENAI_API_KEY'))
 
-    parser.add_argument('--mode', help='Conversation mode using number: praise (0), solve (1), gen summary (2), tips (3) default: 2', type=int, default=2)
-    parser.add_argument('--max_depth', help='Maximum depth to traverse bash history', default=20, type=int)
-    parser.add_argument('--lang', help='Language to use: Japanese (0), English (1) default: 0', type=int, default=0)
-    parser.add_argument('--text_path', help='Path to bash history', default='~/.bash_history')
+def main():
+    parser = argparse.ArgumentParser(
+        description='TerminalTrail✨ - A tool to generate a summary of your bash history using ChatGPT API.')
+    parser.add_argument('--api_key', help='API key for OpenAI (Default: use OPENAI_API_KEY environment)',
+                        default=os.environ.get('OPENAI_API_KEY'))
+
+    parser.add_argument(
+        '--mode', help='Conversation mode using number: praise (0), solve (1), gen summary (2), tips (3) default: 2', type=int, default=2)
+    parser.add_argument(
+        '--max_depth', help='Maximum depth to traverse bash history', default=20, type=int)
+    parser.add_argument(
+        '--lang', help='Language to use: Japanese (0), English (1) default: 0', type=int, default=0)
+    parser.add_argument(
+        '--text_path', help='Path to bash history', default='~/.bash_history')
     args = parser.parse_args()
 
     if args.api_key is None:
@@ -47,8 +56,16 @@ def main():
     chat = chatgpt_api.ChatGPT(args.api_key)
 
     print('------- TerminalTrail✨ Summary -------')
-    print('Mode: {}'.format(args.mode))
-    print('Language: {}'.format(args.lang))
+    if (args.mode == 0):
+        print('Mode: {}'.format(text.praise[args.lang]))
+    elif (args.mode == 1):
+        print('Mode: {}'.format(text.solve[args.lang]))
+    elif (args.mode == 2):
+        print('Mode: {}'.format(text.summary[args.lang]))
+    elif (args.mode == 3):
+        print('Mode: {}'.format(text.tips[args.lang]))
+
+    print('Language: {}'.format(text.lang[args.lang]))
     print('History path: {}'.format(args.text_path))
     print('History max depth: {}'.format(args.max_depth))
     print('')
@@ -56,11 +73,15 @@ def main():
     print('-------------------------------------')
     print('')
 
-    history = get_bash_history(text_path=args.text_path, max_depth=args.max_depth)
+    history = get_bash_history(
+        text_path=args.text_path, max_depth=args.max_depth)
 
-    response = chat.generate_text(history, lang=args.lang, mode=args.mode)
+    print(text.comment_prefix[args.lang])
+    response = chat.generate_text(history, lang=args.lang, mode=args.mode,
+                                  prompt=text.preprompt[args.lang] + text.praise[args.lang] + text.comment_ai[args.lang])
 
     print(response)
+
 
 if __name__ == '__main__':
     main()
